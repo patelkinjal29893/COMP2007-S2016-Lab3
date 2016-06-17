@@ -16,9 +16,9 @@
                 </asp:DropDownList>
 
                 <asp:GridView runat="server" CssClass="table table-bordered table-striped table-hover" 
-                    ID="StudentsGridView" AutoGenerateColumns="false" DataKeyNames="StudentID" OnRowDeleting="StudentsGridView_RowDeleting"
-                    AllowPaging="true" PageSize="3" OnPageIndexChanging="StudentsGridView_PageIndexChanging"
-                    AllowSorting="true" OnSorting="StudentsGridView_Sorting" OnRowDataBound="StudentsGridView_RowDataBound">
+                    ID="StudentsGridView" AutoGenerateColumns="False" DataKeyNames="StudentID" OnRowDeleting="StudentsGridView_RowDeleting"
+                    AllowPaging="True" PageSize="3" OnPageIndexChanging="StudentsGridView_PageIndexChanging"
+                    AllowSorting="True" OnSorting="StudentsGridView_Sorting" OnRowDataBound="StudentsGridView_RowDataBound">
                     <Columns>
                         <asp:BoundField DataField="StudentID" HeaderText="Student ID" Visible="true" SortExpression="StudentID" />
                         <asp:BoundField DataField="LastName" HeaderText="Last Name" Visible="true" SortExpression="LastName"/>
@@ -27,9 +27,15 @@
                             DataFormatString="{0:MMM dd, yyyy}" />
                         <asp:HyperLinkField HeaderText="Edit" Text="<i class='fa fa-pencil-square-o fa-lg'></i> Edit" NavigateUrl="~/StudentDetails.aspx.cs"
                             DataNavigateUrlFields="StudentID" DataNavigateUrlFormatString="StudentDetails.aspx?StudentID={0}" 
-                            ControlStyle-CssClass="btn btn-primary btn-sm" ControlStyle-ForeColor="White"/>
-                        <asp:CommandField HeaderText="Delete" DeleteText="<i class='fa fa-trash-o fa-lg'></i> Delete" ShowDeleteButton="true"
-                            ButtonType="Link" ControlStyle-CssClass="btn btn-danger btn-sm" />
+                            ControlStyle-CssClass="btn btn-primary btn-sm" ControlStyle-ForeColor="White">
+<ControlStyle CssClass="btn btn-primary btn-sm" ForeColor="White"></ControlStyle>
+                        </asp:HyperLinkField>
+                        <asp:TemplateField HeaderText="Delete" ShowHeader="False">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="LinkButtonDelete" runat="server" CausesValidation="False" CommandName="Delete" Text="&lt;i class='fa fa-trash-o fa-lg'&gt;&lt;/i&gt; Delete" OnClientClick="return confirm('Are you sure you want to delete this record?');"></asp:LinkButton>
+                            </ItemTemplate>
+                            <ControlStyle CssClass="btn btn-danger btn-sm" />
+                        </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
             </div>
